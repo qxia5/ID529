@@ -99,8 +99,18 @@ for (i in 1:10000) {
 summary(iterations_needed)
 ```
 
+##Use the here package
+
+##Use Renv helps avoid version difference of code
+makes your code more independent and valid and reproducable by other people.
+
+#Other packages
+target
+rocker
+```{r 1, echo=TRUE, eval=TRUE}
 
 
+```
 
 ## Including Plots
 
