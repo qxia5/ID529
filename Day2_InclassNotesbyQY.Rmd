@@ -1,0 +1,113 @@
+---
+title: "01/09/2024"
+author: "Qianyi Xia"
+date: "2024-01-09"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Note on T and F
+Better to use TRUE and FALSE instead of T or F.
+
+```{r demo in class, echo=TRUE, eval=TRUE}
+x <- 1:10 * 10
+y <- seq(10,100, by = 10)
+
+x == y
+```
+
+```{r demo in class, echo=TRUE, eval=TRUE}
+ x <- 1:5 # x is a vector of 1, 2, 3, 4, 5
+ y<-x*3
+
+ y %% 2 == 0 # the %% operator can be read "remainder after division by ..."
+ # in this case, `y %% 2 == 0` will be TRUE if y is even
+
+ areEven<-y%%2==0
+ areEven
+ # => c(FALSE, TRUE, FALSE, TRUE, FALSE)
+
+ y[areEven]
+ # => c(6, 12) 
+ 
+ which(areEven)
+ # return the sequence
+```
+## Paste0
+paste0 is a sister function to paste which takes sep as an argument for what should be inserted between the strings given, and defaults to a single space.
+
+```{r demo in class, echo=TRUE, eval=TRUE}
+x <- "hello "
+y <- "world"
+z <- "!"
+paste0(x, y, z)
+#> "hello world!"
+
+```
+## Paste0
+Use for loop to read csv files for each states in US
+```{r demo in class, echo=TRUE, eval=TRUE}
+state_data <- list() # start with an empty list
+
+for (state in state.name) {  # state.name is a list of state names built into R
+
+  # we'll talk more about reading in data later today
+  new_data <- read.csv(file = paste0(state, ".csv")) 
+  
+  # create a list element for the data being read in named after the state
+  state_data[[state]] <- state_data 
+}
+
+# clean up the state_data list
+```
+
+```{r demo in class, echo=TRUE, eval=TRUE}
+for (i in 1:50) {
+  print(paste0("the abbreviation for ", state.name[i], " is ", state.abb[i]))
+}
+```
+## While
+here’s a hypothetical: if you draw numbers between 1 through 10 randomly and sum them up, how long will it take you to get a value of at least 100?
+```{r demo in class, echo=TRUE, eval=TRUE}
+n_iterations <- 0 
+value <- 0 
+while (value < 100) {
+  n_iterations <- n_iterations + 1
+  value <- value + sample.int(n = 10, size = 1)
+}
+print(n_iterations)
+
+```
+what if we want to create a larger sample of data to see if our hypothesis was close to some observed data?
+```{r demo in class, echo=TRUE, eval=TRUE}
+iterations_needed <- numeric() # create an empty numeric vector
+
+# we'll run the experiment 10,000 times so we have a substantial amount of data
+for (i in 1:10000) {
+  n_iterations <- 0 
+  value <- 0 
+  while (value < 100) {
+    n_iterations <- n_iterations + 1
+    value <- value + sample.int(n = 10, size = 1)
+  }
+  iterations_needed <- c(iterations_needed, n_iterations)
+}
+
+summary(iterations_needed)
+```
+
+
+
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
